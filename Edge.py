@@ -22,8 +22,14 @@ class TruncEdge:
   vert = 0
   weight = 1
   
-  def __init__(self,vert,weight=1):
-    self.vert = vert
+  def __init__(self,vert=None,weight=1,edge=None,end=False):
+    if edge:
+      if start:
+        self.vert = edge.end
+      else:
+        self.vert = edge.start
+    else:
+      self.vert = vert
     self.weight = weight
 
   def __str__(self):

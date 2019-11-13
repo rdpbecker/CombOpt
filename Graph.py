@@ -1,9 +1,11 @@
+import Edge
+
 class Graph:
   verts = []
   edges = []
   relation = {}
   def __init__(self,vertices,edges):
-    self.vertices = vertices
+    self.verts = vertices
     self.edges = edges
     self.genRelation(vertices,edges)
 
@@ -23,8 +25,8 @@ class Graph:
     for vert in verts:
       self.relation[vert] = []
     for edge in edges:
-      self.relation[edge.start].append(edge)
-      self.realtion[edge.end].append(edge)
+      self.relation[edge.start].append(Edge.TruncEdge(edge=edge,0))
+      self.relation[edge.end].append(Edge.TruncEdge(edge=edge,1))
 
   def addVertex(self,vertex):
     self.vertices.append(vertex)
@@ -34,5 +36,5 @@ class Graph:
     if not edge.start in self.verts or not edge.end in self.verts:
       return
     self.edges.append(edge)
-    self.relation[edge.start].append(TruncEdge(edge,0))
-    self.relation[edge.end].append(TruncEdge(edge,1))
+    self.relation[edge.start].append(Edge.TruncEdge(edge=edge,0))
+    self.relation[edge.end].append(Edge.TruncEdge(edge=edge,1))
