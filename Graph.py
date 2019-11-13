@@ -7,7 +7,19 @@ class Graph:
     self.edges = edges
     self.genRelation(vertices,edges)
 
-  def genRelation(verts,edges):
+  def __str__(self):
+    string = ""
+    for vert in self.verts:
+      string = string + str(vert) + ": " + self.edgeListToString(self.relation[vert]) + "\n" 
+    return string
+
+  def edgeListToString(self,edges):
+    string = ""
+    for edge in edges:
+      string = string + str(edge) + " "
+    return string
+
+  def genRelation(self,verts,edges):
     for vert in verts:
       self.relation[vert] = []
     for edge in edges:
