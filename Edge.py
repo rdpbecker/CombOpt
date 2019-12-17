@@ -8,6 +8,7 @@ class Edge:
     self.start = start
     self.end = end
     self.weight = weight
+    self.reverse = reverse
 
   def __str__(self):
     return "("+str(self.start)+","+str(self.end)+","+str(self.weight)+")"
@@ -18,13 +19,31 @@ class Edge:
   def invert(self):
     return Edge(self.end,self.start,-1*self.weight,self.reverse)
 
+  def newStart(self,vert):
+    return Edge(vert,self.end,self.reverse,self.weight)
+
+  def __eq__(self,edge):
+    if self.start == edge.start:
+      if not self.end == edge.end:
+        return False
+    elif self.start == edge.end:
+      if not self.end == edge.start:
+        return False
+    else:
+      return False
+    if not self.reverse == edge.reverse:
+      return False
+    if not self.weight == edge.weight:
+      return False
+    return True
+
 class TruncEdge:
   vert = 0
   weight = 1
   
-  def __init__(self,vert=None,weight=1,edge=None,end=False):
+  def __init__(self,vert=None,weight=1,edge=None,head=True):
     if edge:
-      if start:
+      if head:
         self.vert = edge.end
       else:
         self.vert = edge.start
